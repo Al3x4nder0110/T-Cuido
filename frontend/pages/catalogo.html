@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Profesionales | T-CUIDO</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        salvia: '#8FAF9B',
+                        oscuro: '#426653',
+                        crema: '#F8F5EF',
+                        beige: '#EDE5D8',
+                        texto: '#29352F',
+                        terracota: '#C98570'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans antialiased">
+
+    <!-- Navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html" class="text-2xl font-bold text-oscuro">T-CUIDO</a>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="../index.html" class="hover:text-oscuro">Inicio</a>
+                <a href="catalogo.html" class="text-oscuro font-semibold">Catálogo</a>
+                <a href="como-funciona.html" class="hover:text-oscuro">Cómo funciona</a>
+                <a href="contacto.html" class="hover:text-oscuro">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-extrabold text-oscuro mb-2">Enfermeros y Cuidadores Disponibles</h1>
+        <p class="text-texto/70 mb-8">Encuentra al profesional ideal para el cuidado que tu familia necesita.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Filtros Laterales -->
+            <aside class="bg-white p-6 rounded-2xl shadow-sm h-fit">
+                <h2 class="font-bold text-lg text-oscuro mb-4">Filtrar búsqueda</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">TIPO DE PROFESIONAL</label>
+                        <select id="filtro-tipo" class="w-full p-2.5 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+                            <option value="">Todos los tipos</option>
+                            <option value="enfermero_titulado">Enfermero Titulado</option>
+                            <option value="personal_sanitario">Personal Sanitario</option>
+                            <option value="cuidador_no_sanitario">Cuidador No Sanitario</option>
+                        </select>
+                    </div>
+                    <button id="btn-aplicar-filtros" class="w-full bg-oscuro text-white py-2.5 rounded-xl text-sm font-medium hover:bg-oscuro/90 transition">
+                        Aplicar Filtros
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Listado de Tarjetas -->
+            <section class="lg:col-span-3">
+                <div id="contenedor-tarjetas" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Las tarjetas se inyectarán dinámicamente con JavaScript -->
+                </div>
+                <!-- Estado vacío -->
+                <div id="estado-vacio" class="hidden text-center py-12 bg-white rounded-2xl shadow-sm">
+                    <p class="text-texto/60 text-lg">No se encontraron profesionales con los filtros seleccionados.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Script del Catálogo -->
+    <script type="module" src="../js/catalogo.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | T-CUIDO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { salvia: '#8FAF9B', oscuro: '#426653', crema: '#F8F5EF', texto: '#29352F' } } } }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans">
+    <header class="bg-white shadow-sm p-4 max-w-7xl mx-auto flex justify-between items-center">
+        <a href="../index.html" class="text-2xl font-bold text-oscuro">T-CUIDO</a>
+    </header>
+    <main class="max-w-lg mx-auto px-4 py-12">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <h1 class="text-2xl font-bold text-oscuro text-center mb-6">Contáctanos</h1>
+            <form class="space-y-4">
+                <input type="text" placeholder="Tu nombre" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+                <input type="email" placeholder="Correo electrónico" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+                <textarea rows="4" placeholder="¿En qué te podemos ayudar?" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro"></textarea>
+                <button type="submit" class="w-full bg-oscuro text-white py-3 rounded-xl font-medium hover:bg-oscuro/90 transition shadow-md">
+                    Enviar Mensaje
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña | T-CUIDO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { colors: { salvia: '#8FAF9B', oscuro: '#426653', crema: '#F8F5EF', texto: '#29352F' } }
+            }
+        }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 w-full max-w-md text-center">
+        <a href="../index.html" class="text-3xl font-extrabold text-oscuro">T-CUIDO</a>
+        <h2 class="text-xl font-bold text-oscuro mt-4 mb-2">Recupera tu contraseña</h2>
+        <p class="text-xs text-texto/70 mb-6">Ingresa tu correo registrado y te enviaremos las instrucciones.</p>
+        
+        <form id="form-recuperar" class="space-y-4">
+            <input type="email" placeholder="correo@ejemplo.com" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+            <button type="submit" class="w-full bg-oscuro text-white py-3 rounded-xl font-medium hover:bg-oscuro/90 transition shadow-md">
+                Enviar enlace
+            </button>
+        </form>
+        <a href="login.html" class="inline-block text-xs font-semibold text-oscuro mt-6 hover:underline">← Volver al login</a>
+    </div>
+</body>
+</html>

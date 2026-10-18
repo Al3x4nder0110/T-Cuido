@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | T-CUIDO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { salvia: '#8FAF9B', oscuro: '#426653', crema: '#F8F5EF', beige: '#EDE5D8', texto: '#29352F' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 w-full max-w-md">
+        <div class="text-center mb-8">
+            <a href="../index.html" class="text-3xl font-extrabold text-oscuro">T-CUIDO</a>
+            <p class="text-sm text-texto/70 mt-2">Ingresa a tu cuenta para gestionar tus solicitudes</p>
+        </div>
+
+        <form id="form-login" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">CORREO ELECTRÓNICO</label>
+                <input type="email" id="correo" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">CONTRASEÑA</label>
+                <input type="password" id="password" required class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+            </div>
+            <div class="text-right">
+                <a href="recuperar.html" class="text-xs font-medium text-oscuro hover:underline">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button type="submit" class="w-full bg-oscuro text-white py-3 rounded-xl font-medium hover:bg-oscuro/90 transition shadow-md">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <p class="text-center text-xs text-texto/70 mt-6">
+            ¿Aún no tienes cuenta? <a href="registro.html" class="font-semibold text-oscuro hover:underline">Regístrate aquí</a>
+        </p>
+    </div>
+
+    <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

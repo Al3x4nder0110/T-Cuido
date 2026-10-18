@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Profesional | T-CUIDO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { salvia: '#8FAF9B', oscuro: '#426653', crema: '#F8F5EF', texto: '#29352F' } } } }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans">
+    <header class="bg-white shadow-sm p-4 flex justify-between items-center max-w-7xl mx-auto">
+        <span class="text-2xl font-bold text-oscuro">T-CUIDO</span>
+        <span class="text-sm text-texto/80 font-medium">Gestión de Perfil Profesional</span>
+    </header>
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+            <h1 class="text-xl font-bold text-oscuro border-b pb-3">Editar Perfil de Atención</h1>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">PRESENTACIÓN PROFESIONAL</label>
+                    <textarea rows="4" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro" placeholder="Describe tu experiencia..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">AÑOS DE EXPERIENCIA</label>
+                        <input type="number" min="0" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">TARIFA ORIENTATIVA (S/)</label>
+                        <input type="number" step="0.10" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:border-oscuro">
+                    </div>
+                </div>
+                <button type="button" class="bg-oscuro text-white py-3 px-6 rounded-xl font-medium hover:bg-oscuro/90 transition shadow-md">
+                    Guardar Cambios
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo | T-CUIDO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { salvia: '#8FAF9B', oscuro: '#426653', crema: '#F8F5EF', texto: '#29352F' } } } }
+    </script>
+</head>
+<body class="bg-crema text-texto font-sans">
+    <header class="bg-white shadow-sm p-4 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl font-bold text-oscuro">T-CUIDO</span>
+            <span class="text-xs font-semibold text-red-600 bg-red-50 px-3 py-1 rounded-full">Administrador</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span id="admin-nombre" class="text-sm font-medium text-texto/80">Cargando...</span>
+            <button id="btn-logout" class="text-xs text-red-600 font-semibold hover:underline">Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold text-oscuro mb-6">Solicitudes de Verificación Pendientes</h1>
+        
+        <div id="contenedor-solicitudes" class="space-y-4">
+            <p class="text-center text-texto/60 py-8">Cargando solicitudes...</p>
+        </div>
+    </main>
+
+    <script type="module">
+        import { cerrarSesion } from '../js/auth.js';
+
+        const API_URL = "/api";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const token = localStorage.getItem("tcuido_token");
+            const usuarioStr = localStorage.getItem("tcuido_usuario");
+            const usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
+
+            // PROTECCIÓN DE RUTA: Si no hay token o no es administrador, expulsar
+            if (!token || !usuario || usuario.tipo_usuario !== 'administrador') {
+                alert("Acceso denegado. Esta zona requiere permisos de administrador.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            document.getElementById("admin-nombre").textContent = `${usuario.nombres} ${usuario.apellidos}`;
+            document.getElementById("btn-logout").addEventListener("click", cerrarSesion);
+
+            // Cargar solicitudes pendientes desde la API protegida
+            cargarSolicitudes(token);
+        });
+
+        async function cargarSolicitudes(token) {
+            const contenedor = document.getElementById("contenedor-solicitudes");
+            try {
+                const res = await fetch(`${API_URL}/admin/solicitudes`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error("Error al obtener solicitudes");
+
+                const solicitudes = await res.json();
+
+                if (solicitudes.length === 0) {
+                    contenedor.innerHTML = `<div class="bg-white p-8 rounded-2xl shadow-sm text-center text-texto/60">
+                        No hay perfiles profesionales pendientes de revisión en este momento.
+                    </div>`;
+                    return;
+                }
+
+                contenedor.innerHTML = solicitudes.map(sol => `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-oscuro">${sol.perfiles_usuario.nombres} ${sol.perfiles_usuario.apellidos}</h3>
+                            <p class="text-xs text-terracota font-semibold uppercase">${sol.tipo_profesional.replace('_', ' ')}</p>
+                            <p class="text-xs text-texto/70 mt-1">Experiencia: ${sol.anos_experiencia || 0} años</p>
+                        </div>
+                        <button onclick="aprobar('${sol.id}')" class="bg-green-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-green-700 transition">
+                            Aprobar y Publicar
+                        </button>
+                    </div>
+                `).join('');
+
+            } catch (err) {
+                contenedor.innerHTML = `<p class="text-center text-red-500 py-8">${err.message}</p>`;
+            }
+        }
+
+        window.aprobar = async function(id) {
+            const token = localStorage.getItem("tcuido_token");
+            try {
+                const res = await fetch(`${API_URL}/admin/aprobar/${id}`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    alert("¡Perfil aprobado con éxito!");
+                    location.reload();
+                }
+            } catch (err) {
+                alert("Error al aprobar el perfil");
+            }
+        };
+    </script>
+</body>
+</html>
